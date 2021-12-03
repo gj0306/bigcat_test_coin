@@ -1,0 +1,57 @@
+syntax = "proto3";
+
+package pro.v1;
+import "google/api/annotations.proto";
+import "app/blc/contract/contract.proto";
+
+option java_multiple_files = true;
+option go_package = "bigcat_test_coin/blockchain/api/v1;v1";
+option java_outer_classname = "SourceV1";
+option java_package = "dev.kratos.api.coin.v1";
+
+// The greeting service definition.
+service SourceGreeter {
+  // Sends a greeting
+  rpc SaySource (SourceRequest) returns (SourceReply)  {
+    option (google.api.http) = {
+      get: "/source/{tx}"
+    };
+  }
+  rpc SayChainSource (SourceChainRequest) returns (SourceChainReply)  {
+    option (google.api.http) = {
+      get: "/chain/{tx}"
+    };
+  }
+  rpc SayCreateSource (CreateSourceRequest) returns (CreateSourceReply)  {
+    option (google.api.http) = {
+      post: "/record"
+      body: "*"
+    };
+  }
+}
+
+message SourceRequest {
+  string tx = 1;
+}
+
+message SourceReply{
+  contract.source source = 1;
+}
+
+message SourceChainRequest {
+  string tx = 1;
+}
+
+message SourceChainReply{
+  repeated contract.source sources = 1;
+
+}
+
+message CreateSourceRequest{
+  string private = 1;
+  contract.source source = 2;
+}
+message CreateSourceReply{
+  string msg = 1;
+  string hx = 2;
+}

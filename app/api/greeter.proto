@@ -1,0 +1,134 @@
+syntax = "proto3";
+
+package pro.v1;
+import "google/api/annotations.proto";
+import "app/blc/blc.proto";
+
+option java_multiple_files = true;
+option go_package = "bigcat_test_coin/blockchain/api/v1;v1";
+option java_outer_classname = "CoinV1";
+option java_package = "dev.kratos.api.coin.v1";
+
+// The greeting service definition.
+service Greeter {
+  // Sends a greeting
+  rpc SayBlocks (BlocksRequest) returns (BlocksReply)  {
+    option (google.api.http) = {
+      get: "/blocks"
+    };
+  }
+  rpc SayBlock (BlockRequest) returns (BlockReply)  {
+    option (google.api.http) = {
+      get: "/block/{parm}"
+    };
+  }
+  rpc SayTransaction (GetTransactionRequest) returns (GetTransactionReply)  {
+    option (google.api.http) = {
+      get: "/transaction/{tx}"
+    };
+  }
+  rpc SayCont (GetContRequest) returns (GetContReply)  {
+    option (google.api.http) = {
+      get: "/cont/{tx}"
+    };
+  }
+  rpc SayAccount (GetAccountRequest) returns (GetAccountReply)  {
+    option (google.api.http) = {
+      get: "/account/{addr}"
+    };
+  }
+  rpc SayMiners (GetMinersRequest) returns (GetMinersReply)  {
+    option (google.api.http) = {
+      get: "/miners"
+    };
+  }
+  rpc SayNodes (GetNodesRequest) returns (GetNodesReply)  {
+    option (google.api.http) = {
+      get: "/nodes"
+    };
+  }
+  rpc SayCreateTransaction (CreateTransactionRequest) returns (CreateTransactionReply)  {
+      option (google.api.http) = {
+        post: "/transaction"
+        body: "*"
+      };
+  }
+  rpc SayCreateCont (CreateContRequest) returns (CreateContReply)  {
+    option (google.api.http) = {
+      post: "/cont"
+      body: "*"
+    };
+  }
+
+}
+
+//block
+message BlocksRequest {
+  int64 left_height = 1;
+  int64 right_height = 2;
+}
+message BlocksReply {
+  repeated blc.Block blocks = 1;
+}
+
+message BlockRequest{
+  string parm = 1;
+}
+message BlockReply{
+  blc.Block block = 1;
+}
+
+//交易
+message GetTransactionRequest{
+  string tx = 1;
+}
+message GetTransactionReply{
+  blc.Transaction transaction = 1;
+}
+
+//合约
+message GetContRequest{
+  string tx = 1;
+}
+message GetContReply{
+  blc.Cont cont = 1;
+}
+
+//账户
+message GetAccountRequest{
+  string addr = 1;
+}
+message GetAccountReply{
+  blc.Account account = 1;
+}
+
+message GetMinersRequest{
+
+}
+
+message GetMinersReply{
+  repeated blc.Miner miners = 1;
+}
+
+message GetNodesRequest{
+
+}
+message GetNodesReply{
+  repeated string nodes = 1;
+}
+
+//新增交易
+message CreateTransactionRequest{
+  blc.Transaction  tran = 1;
+}
+message CreateTransactionReply{
+  int64 code = 1;
+  string msg = 2;
+}
+message CreateContRequest{
+   blc.Cont cont = 1;
+}
+message CreateContReply{
+  int64 code = 1;
+  string msg = 2;
+}

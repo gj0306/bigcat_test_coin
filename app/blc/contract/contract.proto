@@ -1,0 +1,26 @@
+syntax = "proto3";
+
+package contract;
+option java_multiple_files = true;
+option go_package = "bigcat_test_coin/app/blc/contract;contract";
+option java_outer_classname = "ContractV1";
+option java_package = "dev.kratos.api.coin.v1";
+
+
+message news {
+  string title = 1;
+  string content = 2;
+}
+
+message profile{
+  string name = 1;
+  string head = 2;
+  string introduce = 3;
+}
+
+message source{
+  bytes  quote = 1;
+  string from = 2;
+  string to = 3;
+  string content = 4;
+}

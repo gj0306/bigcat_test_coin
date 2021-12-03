@@ -1,0 +1,59 @@
+syntax = "proto3";
+
+package blc;
+option java_multiple_files = true;
+option go_package = "bigcat_test_coin/app/blc;blc";
+option java_outer_classname = "AddrV1";
+option java_package = "dev.kratos.api.coin.v1";
+
+
+//基本数据结构体
+message Transaction {
+  string to = 1;
+  int64  Value = 2;
+  int64  fee = 3;
+  int64  number = 4;
+  bytes  public_key = 5;
+  bytes  signature = 6;
+  bytes  tx_hash = 7;
+}
+
+message Cont {
+  int64 conn_type = 1;
+  bytes public_key = 2;
+  bytes signature = 3;
+  bytes tx_hash = 4;
+  bytes quote = 5;
+  bytes data = 6;
+  int64 number = 7;
+}
+message Account{
+  string address = 1;
+  int64  income = 2;
+  int64  value = 3;
+}
+message Verifier{
+  bytes signature = 1;
+  bytes public_key = 2;
+  bytes pre_hash = 3;
+}
+message Block {
+  bytes pre_hash = 1;
+  bytes hash = 2;
+  int64 time_stamp = 3;
+  int64 height = 4;
+  int64 verifier_total = 5;
+  repeated Cont contracts = 6;
+  repeated Transaction transactions = 7;
+  repeated Account accounts = 8;
+  repeated Verifier verifiers = 9;
+}
+
+message Miner {
+  int64 number = 1;
+  string addr = 2;
+  int64 last_height = 3;
+  int64 lose_height = 4;
+  int64 clear_height = 5;
+
+}

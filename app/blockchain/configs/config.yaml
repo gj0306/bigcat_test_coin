@@ -1,0 +1,27 @@
+debug: true
+is_genesis: true
+log :
+  log_path: "./logs/"
+  log_file_name : "bigcat_test_coin.log"
+  debug : true
+address :
+  #私钥
+  private_key : "9d7uj6PkeHMxwiLv5fzzZQWRuSuXXToLyjf3F1NGdrtv"
+network:
+  #端口
+  port: 23001
+  #连接地址
+  addr: "kcp://192.168.31.204:23001"
+  #网络初始化
+
+db:
+  #数据库名称 badger boltdb
+  driver_name : "boltdb"
+  dir : "./data"
+server:
+  open: true
+  http_addr: "0.0.0.0:9802"
+  http_timeout: 1
+  grpc_addr: "0.0.0.0:9902"
+  grpc_timeout: 1
+  swagger : true
